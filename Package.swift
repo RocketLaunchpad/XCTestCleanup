@@ -41,11 +41,9 @@ let package = Package(
             dependencies: []),
         .target(
             name: "XCTestCleanup",
-            dependencies: ["XCTestSwizzleHook"],
-            exclude: ["Info.plist"]),
+            dependencies: ["XCTestSwizzleHook"]),
         .testTarget(
             name: "XCTestCleanupTests",
-            dependencies: ["XCTestCleanup"],
-            exclude: ["Info.plist"]),
+            dependencies: ["XCTestCleanup"]),
     ]
 )
