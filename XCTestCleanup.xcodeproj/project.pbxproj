@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		C52A633D22F71EB900A0F7BA /* XCTestCleanup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52A633322F71EB900A0F7BA /* XCTestCleanup.framework */; };
-		C52A634222F71EB900A0F7BA /* XCTestCleanupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52A634122F71EB900A0F7BA /* XCTestCleanupTests.swift */; };
 		C52A635722F71F7800A0F7BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52A635622F71F7800A0F7BA /* AppDelegate.swift */; };
 		C52A635922F71F7800A0F7BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52A635822F71F7800A0F7BA /* ViewController.swift */; };
 		C52A635C22F71F7800A0F7BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C52A635A22F71F7800A0F7BA /* Main.storyboard */; };
@@ -18,6 +17,15 @@
 		C563A044256C23AE00F3BA3C /* XCTestCleanup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52A633322F71EB900A0F7BA /* XCTestCleanup.framework */; };
 		C563A045256C23AE00F3BA3C /* XCTestCleanup.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C52A633322F71EB900A0F7BA /* XCTestCleanup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C563A052256C248F00F3BA3C /* XCTestCleanup.h in Headers */ = {isa = PBXBuildFile; fileRef = C563A051256C248F00F3BA3C /* XCTestCleanup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C5B3E99326989C0C00B9B2DC /* XCTestCase+Swizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = C5B3E99126989C0C00B9B2DC /* XCTestCase+Swizzle.h */; };
+		C5B3E99426989C0C00B9B2DC /* XCTestCase+Swizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B3E99226989C0C00B9B2DC /* XCTestCase+Swizzle.m */; };
+		C5B3E99726989C8D00B9B2DC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5B3E99626989C8D00B9B2DC /* XCTest.framework */; platformFilter = ios; };
+		C5B3E99D26989D7D00B9B2DC /* XCTestCase+Introspection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B3E99C26989D7D00B9B2DC /* XCTestCase+Introspection.swift */; };
+		C5B3E99F2698A06C00B9B2DC /* AutoTearDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B3E99E2698A06C00B9B2DC /* AutoTearDown.swift */; };
+		C5B3E9A12698A13B00B9B2DC /* TestConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B3E9A02698A13B00B9B2DC /* TestConstant.swift */; };
+		C5B3E9A32698A1F400B9B2DC /* TestMemoryLeakError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B3E9A22698A1F400B9B2DC /* TestMemoryLeakError.swift */; };
+		C5B3E9A52698AC6F00B9B2DC /* TestCleanupError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B3E9A42698AC6F00B9B2DC /* TestCleanupError.swift */; };
+		C5B3E9A72698B28A00B9B2DC /* TestDetectMemoryLeak.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B3E9A62698B28A00B9B2DC /* TestDetectMemoryLeak.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +62,6 @@
 /* Begin PBXFileReference section */
 		C52A633322F71EB900A0F7BA /* XCTestCleanup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCTestCleanup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C52A633C22F71EB900A0F7BA /* XCTestCleanupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCTestCleanupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C52A634122F71EB900A0F7BA /* XCTestCleanupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCleanupTests.swift; sourceTree = "<group>"; };
 		C52A634322F71EB900A0F7BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C52A635422F71F7800A0F7BA /* XCTestCleanupExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XCTestCleanupExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C52A635622F71F7800A0F7BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +74,15 @@
 		C563A03F256C235F00F3BA3C /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		C563A051256C248F00F3BA3C /* XCTestCleanup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCTestCleanup.h; sourceTree = "<group>"; };
 		C563A059256C252F00F3BA3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5B3E99126989C0C00B9B2DC /* XCTestCase+Swizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XCTestCase+Swizzle.h"; sourceTree = "<group>"; };
+		C5B3E99226989C0C00B9B2DC /* XCTestCase+Swizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "XCTestCase+Swizzle.m"; sourceTree = "<group>"; };
+		C5B3E99626989C8D00B9B2DC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C5B3E99C26989D7D00B9B2DC /* XCTestCase+Introspection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Introspection.swift"; sourceTree = "<group>"; };
+		C5B3E99E2698A06C00B9B2DC /* AutoTearDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoTearDown.swift; sourceTree = "<group>"; };
+		C5B3E9A02698A13B00B9B2DC /* TestConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConstant.swift; sourceTree = "<group>"; };
+		C5B3E9A22698A1F400B9B2DC /* TestMemoryLeakError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMemoryLeakError.swift; sourceTree = "<group>"; };
+		C5B3E9A42698AC6F00B9B2DC /* TestCleanupError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCleanupError.swift; sourceTree = "<group>"; };
+		C5B3E9A62698B28A00B9B2DC /* TestDetectMemoryLeak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDetectMemoryLeak.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5B3E99726989C8D00B9B2DC /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +121,7 @@
 				C52A634F22F71F4200A0F7BA /* Tests */,
 				C52A636622F71F7E00A0F7BA /* Examples */,
 				C52A633422F71EB900A0F7BA /* Products */,
+				C5B3E99526989C8D00B9B2DC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -120,9 +138,16 @@
 		C52A633522F71EB900A0F7BA /* XCTestCleanup */ = {
 			isa = PBXGroup;
 			children = (
+				C5B3E99E2698A06C00B9B2DC /* AutoTearDown.swift */,
+				C563A059256C252F00F3BA3C /* Info.plist */,
+				C5B3E9A42698AC6F00B9B2DC /* TestCleanupError.swift */,
+				C5B3E9A02698A13B00B9B2DC /* TestConstant.swift */,
+				C5B3E9A22698A1F400B9B2DC /* TestMemoryLeakError.swift */,
+				C5B3E99C26989D7D00B9B2DC /* XCTestCase+Introspection.swift */,
+				C5B3E99126989C0C00B9B2DC /* XCTestCase+Swizzle.h */,
+				C5B3E99226989C0C00B9B2DC /* XCTestCase+Swizzle.m */,
 				C563A051256C248F00F3BA3C /* XCTestCleanup.h */,
 				C52A636722F71FD200A0F7BA /* XCTestCleanup.swift */,
-				C563A059256C252F00F3BA3C /* Info.plist */,
 			);
 			path = XCTestCleanup;
 			sourceTree = "<group>";
@@ -130,8 +155,8 @@
 		C52A634022F71EB900A0F7BA /* XCTestCleanupTests */ = {
 			isa = PBXGroup;
 			children = (
-				C52A634122F71EB900A0F7BA /* XCTestCleanupTests.swift */,
 				C52A634322F71EB900A0F7BA /* Info.plist */,
+				C5B3E9A62698B28A00B9B2DC /* TestDetectMemoryLeak.swift */,
 			);
 			path = XCTestCleanupTests;
 			sourceTree = "<group>";
@@ -173,6 +198,14 @@
 			path = Examples;
 			sourceTree = "<group>";
 		};
+		C5B3E99526989C8D00B9B2DC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C5B3E99626989C8D00B9B2DC /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -180,6 +213,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5B3E99326989C0C00B9B2DC /* XCTestCase+Swizzle.h in Headers */,
 				C563A052256C248F00F3BA3C /* XCTestCleanup.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,10 +288,11 @@
 				TargetAttributes = {
 					C52A633222F71EB900A0F7BA = {
 						CreatedOnToolsVersion = 10.2.1;
-						LastSwiftMigration = 1020;
+						LastSwiftMigration = 1250;
 					};
 					C52A633B22F71EB900A0F7BA = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1250;
 					};
 					C52A635322F71F7800A0F7BA = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -316,7 +351,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5B3E99D26989D7D00B9B2DC /* XCTestCase+Introspection.swift in Sources */,
 				C52A636822F71FD200A0F7BA /* XCTestCleanup.swift in Sources */,
+				C5B3E9A12698A13B00B9B2DC /* TestConstant.swift in Sources */,
+				C5B3E99F2698A06C00B9B2DC /* AutoTearDown.swift in Sources */,
+				C5B3E9A52698AC6F00B9B2DC /* TestCleanupError.swift in Sources */,
+				C5B3E9A32698A1F400B9B2DC /* TestMemoryLeakError.swift in Sources */,
+				C5B3E99426989C0C00B9B2DC /* XCTestCase+Swizzle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,7 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C52A634222F71EB900A0F7BA /* XCTestCleanupTests.swift in Sources */,
+				C5B3E9A72698B28A00B9B2DC /* TestDetectMemoryLeak.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,7 +556,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rocketinsights.XCTestCleanup";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocketinsights.XCTestCleanup;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -543,7 +584,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rocketinsights.XCTestCleanup";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocketinsights.XCTestCleanup;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -555,6 +596,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HHWT4HF657;
 				INFOPLIST_FILE = "$(SRCROOT)/Tests/XCTestCleanupTests/Info.plist";
@@ -563,8 +605,9 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rocketinsights.XCTestCleanupTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocketinsights.XCTestCleanupTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -574,6 +617,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HHWT4HF657;
 				INFOPLIST_FILE = "$(SRCROOT)/Tests/XCTestCleanupTests/Info.plist";
@@ -582,7 +626,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rocketinsights.XCTestCleanupTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocketinsights.XCTestCleanupTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -601,7 +645,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rocketinsights.XCTestCleanupExample";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocketinsights.XCTestCleanupExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -620,7 +664,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rocketinsights.XCTestCleanupExample";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocketinsights.XCTestCleanupExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -1,6 +1,5 @@
-// swift-tools-version:5.3
 //
-//  Package.swift
+//  TestCleanupError.swift
 //  XCTestCleanup
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
@@ -24,25 +23,19 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-import PackageDescription
+import Foundation
 
-let package = Package(
-    name: "XCTestCleanup",
-    products: [
-        .library(
-            name: "XCTestCleanup",
-            targets: ["XCTestCleanup"]),
-    ],
-    dependencies: [
-    ],
-    targets: [
-        .target(
-            name: "XCTestCleanup",
-            dependencies: ["XCTest"],
-            exclude: ["Info.plist"]),
-        .testTarget(
-            name: "XCTestCleanupTests",
-            dependencies: ["XCTestCleanup"],
-            exclude: ["Info.plist"]),
-    ]
-)
+@objc public class TestCleanupError: NSObject, CustomNSError {
+
+    public let memoryLeakErrors: [TestMemoryLeakError]
+
+    @objc public init(memoryLeakErrors: [TestMemoryLeakError]) {
+        self.memoryLeakErrors = memoryLeakErrors
+    }
+
+    public override var description: String {
+        return memoryLeakErrors.map {
+            $0.description
+        }.joined(separator: ",\n")
+    }
+}

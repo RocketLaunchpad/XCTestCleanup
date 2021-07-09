@@ -1,6 +1,5 @@
-// swift-tools-version:5.3
 //
-//  Package.swift
+//  TestConstant.swift
 //  XCTestCleanup
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
@@ -24,25 +23,24 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-import PackageDescription
+import Foundation
 
-let package = Package(
-    name: "XCTestCleanup",
-    products: [
-        .library(
-            name: "XCTestCleanup",
-            targets: ["XCTestCleanup"]),
-    ],
-    dependencies: [
-    ],
-    targets: [
-        .target(
-            name: "XCTestCleanup",
-            dependencies: ["XCTest"],
-            exclude: ["Info.plist"]),
-        .testTarget(
-            name: "XCTestCleanupTests",
-            dependencies: ["XCTestCleanup"],
-            exclude: ["Info.plist"]),
-    ]
-)
+public protocol TestConstantProtocol { }
+
+@propertyWrapper
+public class TestConstant<Type>: TestConstantProtocol {
+
+    public var wrappedValue: Type {
+        didSet {
+            // Since we are calling this a "constant" we should not allow it to be modified.
+            // However, property wrappers can only be used on a `var`, not on a `let`, so we can't rely on the compiler
+            // to enforce read-only access.
+            // We crash the test when a write is attempted, since we can't otherwise raise an error.
+            fatalError("Attempt to modify a TestConstant")
+        }
+    }
+
+    public init(wrappedValue: Type) {
+        self.wrappedValue = wrappedValue
+    }
+}

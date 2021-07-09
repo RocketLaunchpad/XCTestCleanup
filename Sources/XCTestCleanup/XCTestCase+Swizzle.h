@@ -1,6 +1,5 @@
-// swift-tools-version:5.3
 //
-//  Package.swift
+//  XCTestCase+Swizzle.h
 //  XCTestCleanup
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
@@ -24,25 +23,12 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-import PackageDescription
+#import <XCTest/XCTest.h>
 
-let package = Package(
-    name: "XCTestCleanup",
-    products: [
-        .library(
-            name: "XCTestCleanup",
-            targets: ["XCTestCleanup"]),
-    ],
-    dependencies: [
-    ],
-    targets: [
-        .target(
-            name: "XCTestCleanup",
-            dependencies: ["XCTest"],
-            exclude: ["Info.plist"]),
-        .testTarget(
-            name: "XCTestCleanupTests",
-            dependencies: ["XCTestCleanup"],
-            exclude: ["Info.plist"]),
-    ]
-)
+NS_ASSUME_NONNULL_BEGIN
+
+@interface XCTestCase (Swizzle)
+
+@end
+
+NS_ASSUME_NONNULL_END

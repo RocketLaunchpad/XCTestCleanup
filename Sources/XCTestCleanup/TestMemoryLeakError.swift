@@ -1,6 +1,5 @@
-// swift-tools-version:5.3
 //
-//  Package.swift
+//  TestMemoryLeakError.swift
 //  XCTestCleanup
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
@@ -24,25 +23,20 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-import PackageDescription
+import Foundation
 
-let package = Package(
-    name: "XCTestCleanup",
-    products: [
-        .library(
-            name: "XCTestCleanup",
-            targets: ["XCTestCleanup"]),
-    ],
-    dependencies: [
-    ],
-    targets: [
-        .target(
-            name: "XCTestCleanup",
-            dependencies: ["XCTest"],
-            exclude: ["Info.plist"]),
-        .testTarget(
-            name: "XCTestCleanupTests",
-            dependencies: ["XCTestCleanup"],
-            exclude: ["Info.plist"]),
-    ]
-)
+@objc public class TestMemoryLeakError: NSObject, Error {
+
+    public let className: String
+
+    public let propertyName: String
+
+    init(className: String, propertyName: String) {
+        self.className = className
+        self.propertyName = propertyName
+    }
+
+    public override var description: String {
+        "Property \(propertyName) in class \(className) was not set to nil at the end of the test"
+    }
+}

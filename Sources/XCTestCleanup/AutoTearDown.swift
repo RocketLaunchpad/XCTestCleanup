@@ -1,6 +1,6 @@
 //
-//  XCTestCleanupTests.swift
-//  XCTestCleanupTests
+//  AutoTearDown.swift
+//  XCTestCleanup
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
 //
@@ -23,29 +23,22 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-import XCTest
-@testable import XCTestCleanup
+import Foundation
 
-class XCTestCleanupTests: XCTestCase {
+public protocol AutoTearDownProtocol {
+    func tearDown()
+}
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+@propertyWrapper
+public class AutoTearDown<Type>: AutoTearDownProtocol {
+
+    public var wrappedValue: Optional<Type>
+
+    public init(wrappedValue: Optional<Type>) {
+        self.wrappedValue = wrappedValue
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        print(XCTestCleanup.text)
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    public func tearDown() {
+        wrappedValue = nil
     }
 }

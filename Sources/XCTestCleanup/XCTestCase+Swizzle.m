@@ -1,6 +1,5 @@
-// swift-tools-version:5.3
 //
-//  Package.swift
+//  XCTestCase+Swizzle.m
 //  XCTestCleanup
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
@@ -24,25 +23,40 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-import PackageDescription
+#import "XCTestCase+Swizzle.h"
+#import <XCTestCleanup/XCTestCleanup-Swift.h>
 
-let package = Package(
-    name: "XCTestCleanup",
-    products: [
-        .library(
-            name: "XCTestCleanup",
-            targets: ["XCTestCleanup"]),
-    ],
-    dependencies: [
-    ],
-    targets: [
-        .target(
-            name: "XCTestCleanup",
-            dependencies: ["XCTest"],
-            exclude: ["Info.plist"]),
-        .testTarget(
-            name: "XCTestCleanupTests",
-            dependencies: ["XCTestCleanup"],
-            exclude: ["Info.plist"]),
-    ]
-)
+#import <objc/runtime.h>
+
+@implementation XCTestCase (Swizzle)
+
++ (void)load
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Class class = [self class];
+
+        method_exchangeImplementations(class_getInstanceMethod(class, @selector(tearDownWithError:)),
+                                       class_getInstanceMethod(class, @selector(swizzled_tearDownWithError:)));
+    });
+}
+
+- (BOOL)swizzled_tearDownWithError:(NSError *__autoreleasing  _Nullable *)error
+{
+    BOOL success = [self inspectPropertiesAndReturnError:error];
+    if (success)
+    {
+        if ([self respondsToSelector:@selector(swizzled_tearDownWithError:)])
+        {
+            return [self swizzled_tearDownWithError:error];
+        }
+        else
+        {
+            return YES;
+        }
+    }
+
+    return success;
+}
+
+@end
