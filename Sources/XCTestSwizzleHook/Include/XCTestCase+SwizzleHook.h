@@ -1,6 +1,6 @@
 //
-//  XCTestCase+Swizzle.m
-//  XCTestCleanup
+//  XCTestCase+SwizzleHook.h
+//  XCTestSwizzleHook
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
 //
@@ -23,40 +23,12 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-#import "XCTestCase+Swizzle.h"
-#import <XCTestCleanup/XCTestCleanup-Swift.h>
+@import XCTest;
 
-#import <objc/runtime.h>
+NS_ASSUME_NONNULL_BEGIN
 
-@implementation XCTestCase (Swizzle)
-
-+ (void)load
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        Class class = [self class];
-
-        method_exchangeImplementations(class_getInstanceMethod(class, @selector(tearDownWithError:)),
-                                       class_getInstanceMethod(class, @selector(swizzled_tearDownWithError:)));
-    });
-}
-
-- (BOOL)swizzled_tearDownWithError:(NSError *__autoreleasing  _Nullable *)error
-{
-    BOOL success = [self inspectPropertiesAndReturnError:error];
-    if (success)
-    {
-        if ([self respondsToSelector:@selector(swizzled_tearDownWithError:)])
-        {
-            return [self swizzled_tearDownWithError:error];
-        }
-        else
-        {
-            return YES;
-        }
-    }
-
-    return success;
-}
+@interface XCTestCase (SwizzleHook)
 
 @end
+
+NS_ASSUME_NONNULL_END

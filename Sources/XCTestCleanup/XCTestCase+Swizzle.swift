@@ -1,6 +1,5 @@
-// swift-tools-version:5.3
 //
-//  Package.swift
+//  XCTestCase+Swizzle.swift
 //  XCTestCleanup
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
@@ -24,28 +23,23 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-import PackageDescription
+import XCTest
+import XCTestSwizzleHook
 
-let package = Package(
-    name: "XCTestCleanup",
-    products: [
-        .library(
-            name: "XCTestCleanup",
-            targets: ["XCTestCleanup"]),
-    ],
-    dependencies: [
-    ],
-    targets: [
-        .target(
-            name: "XCTestSwizzleHook",
-            dependencies: []),
-        .target(
-            name: "XCTestCleanup",
-            dependencies: ["XCTestSwizzleHook"],
-            exclude: ["Info.plist"]),
-        .testTarget(
-            name: "XCTestCleanupTests",
-            dependencies: ["XCTestCleanup"],
-            exclude: ["Info.plist"]),
-    ]
-)
+extension XCTestCase {
+
+    private static let __swizzleMethods: Void = {
+        method_exchangeImplementations(
+            class_getInstanceMethod(XCTestCase.self, #selector(tearDownWithError))!,
+            class_getInstanceMethod(XCTestCase.self, #selector(swizzled_tearDownWithError))!)
+    }()
+
+    public static func loadSwizzleHook() {
+        _ = __swizzleMethods
+    }
+
+    public func swizzled_tearDownWithError() throws {
+        try inspectProperties()
+        return try swizzled_tearDownWithError()
+    }
+}

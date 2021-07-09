@@ -1,6 +1,6 @@
 //
-//  XCTestCase+Swizzle.h
-//  XCTestCleanup
+//  XCTestSwizzleHook.h
+//  XCTestSwizzleHook
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
 //
@@ -23,12 +23,11 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-#import <XCTest/XCTest.h>
 
-NS_ASSUME_NONNULL_BEGIN
+@import XCTest;
 
-@interface XCTestCase (Swizzle)
-
-@end
-
-NS_ASSUME_NONNULL_END
+#if __has_include("XCTestCase+SwizzleHook.h")
+#import "XCTestCase+SwizzleHook.h"
+#else
+#import <XCTestSwizzleHook/XCTestCase+SwizzleHook.h>
+#endif

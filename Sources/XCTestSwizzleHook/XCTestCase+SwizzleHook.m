@@ -1,7 +1,6 @@
-// swift-tools-version:5.3
 //
-//  Package.swift
-//  XCTestCleanup
+//  XCTestCase+SwizzleHook.h
+//  XCTestSwizzleHook
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
 //
@@ -24,28 +23,22 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-import PackageDescription
+@import XCTest;
+#import "XCTestCase+SwizzleHook.h"
 
-let package = Package(
-    name: "XCTestCleanup",
-    products: [
-        .library(
-            name: "XCTestCleanup",
-            targets: ["XCTestCleanup"]),
-    ],
-    dependencies: [
-    ],
-    targets: [
-        .target(
-            name: "XCTestSwizzleHook",
-            dependencies: []),
-        .target(
-            name: "XCTestCleanup",
-            dependencies: ["XCTestSwizzleHook"],
-            exclude: ["Info.plist"]),
-        .testTarget(
-            name: "XCTestCleanupTests",
-            dependencies: ["XCTestCleanup"],
-            exclude: ["Info.plist"]),
-    ]
-)
+@implementation XCTestCase (SwizzleHook)
+
+// We cannot implement +load in Swift, so we need to do it in Objective-C.
+// Simply perform the +loadSwizzleHook selector if self responds to it.
+//
+// We cannot declare that selector in our interface because we would not be able to override it from Swift, so we have
+// to use -performSelector: instead of calling it directly.
++ (void)load
+{
+    if ([self respondsToSelector:@selector(loadSwizzleHook)])
+    {
+        [self performSelector:@selector(loadSwizzleHook)];
+    }
+}
+
+@end
