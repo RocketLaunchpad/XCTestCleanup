@@ -2,7 +2,7 @@
 
 `XCTestCase` behavior can be surprising. The number of `XCTestCase` objects created and how long they live is somewhat counterintuitive.
 
-The flow of execution runs something like this (h/t [this blog post]()):
+The flow of execution runs something like this ([source](https://qualitycoding.org/xctestcase-teardown/)):
 
 1. `XCTest` queries the runtime for all subclasses of `XCTestCase`. For each such class, it queries for all methods that:
     1. Are not `private`
