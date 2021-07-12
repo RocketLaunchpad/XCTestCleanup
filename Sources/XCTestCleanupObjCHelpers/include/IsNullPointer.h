@@ -1,6 +1,6 @@
 //
-//  XCTestCase+SwizzleHook.h
-//  XCTestSwizzleHook
+//  IsNullPointer.h
+//  XCTestCleanupObjCHelpers
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
 //
@@ -23,12 +23,4 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-@import XCTest;
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface XCTestCase (SwizzleHook)
-
-@end
-
-NS_ASSUME_NONNULL_END
+BOOL IsNullPointer(id ptr);

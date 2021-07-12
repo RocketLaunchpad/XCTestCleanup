@@ -1,6 +1,6 @@
 //
-//  XCTestSwizzleHook.h
-//  XCTestSwizzleHook
+//  IsNullPointer.m
+//  XCTestCleanupObjCHelpers
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
 //
@@ -23,13 +23,11 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
+@import Foundation;
 
-@import XCTest;
+#import "IsNullPointer.h"
 
-#if __has_include("XCTestCase+SwizzleHook.h")
-#import "XCTestCase+SwizzleHook.h"
-#else
-#import <XCTestSwizzleHook/XCTestCase+SwizzleHook.h>
-#endif
-
-BOOL IsNilPointer(id pointer);
+BOOL IsNullPointer(id ptr)
+{
+    return ptr == NULL;
+}

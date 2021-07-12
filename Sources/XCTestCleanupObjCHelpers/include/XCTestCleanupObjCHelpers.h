@@ -1,6 +1,6 @@
 //
-//  XCTestCase+Swizzle.swift
-//  XCTestCleanup
+//  XCTestCleanupObjCHelpers.h
+//  XCTestCleanupObjCHelpers
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
 //
@@ -23,23 +23,14 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-import XCTest
-import XCTestCleanupObjCHelpers
+@import Foundation;
 
-extension XCTestCase {
+#if __has_include("XCTestCase+SwizzleHook.h")
+#import "IsNullPointer.h"
+#import "XCTestCase+SwizzleHook.h"
+#else
+#import <XCTestCleanupObjcHelpers/IsNullPointer.h>
+#import <XCTestCleanupObjcHelpers/XCTestCase+SwizzleHook.h>
+#endif
 
-    private static let __swizzleMethods: Void = {
-        method_exchangeImplementations(
-            class_getInstanceMethod(XCTestCase.self, #selector(tearDownWithError))!,
-            class_getInstanceMethod(XCTestCase.self, #selector(swizzled_tearDownWithError))!)
-    }()
-
-    public static func loadSwizzleHook() {
-        _ = __swizzleMethods
-    }
-
-    public func swizzled_tearDownWithError() throws {
-        try inspectProperties()
-        return try swizzled_tearDownWithError()
-    }
-}
+BOOL IsNilPointer(id pointer);

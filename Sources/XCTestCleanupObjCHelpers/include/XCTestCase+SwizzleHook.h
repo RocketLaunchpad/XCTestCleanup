@@ -1,6 +1,6 @@
 //
-//  XCTestCase+Swizzle.swift
-//  XCTestCleanup
+//  XCTestCase+SwizzleHook.h
+//  XCTestCleanupObjCHelpers
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
 //
@@ -23,23 +23,12 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
-import XCTest
-import XCTestCleanupObjCHelpers
+@import XCTest;
 
-extension XCTestCase {
+NS_ASSUME_NONNULL_BEGIN
 
-    private static let __swizzleMethods: Void = {
-        method_exchangeImplementations(
-            class_getInstanceMethod(XCTestCase.self, #selector(tearDownWithError))!,
-            class_getInstanceMethod(XCTestCase.self, #selector(swizzled_tearDownWithError))!)
-    }()
+@interface XCTestCase (SwizzleHook)
 
-    public static func loadSwizzleHook() {
-        _ = __swizzleMethods
-    }
+@end
 
-    public func swizzled_tearDownWithError() throws {
-        try inspectProperties()
-        return try swizzled_tearDownWithError()
-    }
-}
+NS_ASSUME_NONNULL_END

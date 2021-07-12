@@ -38,11 +38,11 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "XCTestSwizzleHook",
+            name: "XCTestCleanupObjCHelpers",
             dependencies: []),
         .target(
             name: "XCTestCleanup",
-            dependencies: ["XCTestSwizzleHook"]),
+            dependencies: ["XCTestCleanupObjCHelpers"]),
         .testTarget(
             name: "XCTestCleanupTests",
             dependencies: ["XCTestCleanup", "Quick"]),

@@ -24,7 +24,7 @@
 //
 
 import XCTest
-import XCTestSwizzleHook
+import XCTestCleanupObjCHelpers
 
 public extension XCTestCase {
 
@@ -35,6 +35,7 @@ public extension XCTestCase {
         // Iterate over the child properties of self
         let memoryLeakErrors = selfMirror.children.compactMap { (label: String?, value: Any) -> TestMemoryLeakError? in
             guard let propertyName = label else {
+                NSLog("Ignoring unnamed property")
                 return nil
             }
 
@@ -42,7 +43,8 @@ public extension XCTestCase {
             // It will crash if we try to create a Mirror for such an uninitialized value.
             // There's no easy way to do a numeric comparison to see if the address of value is equal to 0x00000000, so
             // we'll delegate to an Objective-C helper function.
-            if IsNilPointer(value) {
+            if IsNullPointer(value) {
+                NSLog("Ignoring raw null pointer for %@", propertyName)
                 return nil
             }
 
@@ -62,26 +64,31 @@ public extension XCTestCase {
             if childMirror.displayStyle != .optional || childMirror.children.count != 0 {
                 // Tear down properties marked as @AutoTearDown
                 if let toTearDown = value as? AutoTearDownProtocol {
+                    NSLog("Auto tear down property %@", propertyName)
                     toTearDown.tearDown()
                     return nil
                 }
                 // Ignore properties marked as @TestConstant
                 else if let _ = value as? TestConstantProtocol {
+                    NSLog("Ignoring test constant property %@", propertyName)
                     return nil
                 }
                 // Signal a leak
                 else {
+                    NSLog("Found memory leak of property %@", propertyName)
                     return TestMemoryLeakError(className: className, propertyName: propertyName)
                 }
             }
             // Otherwise, this did not need to be set to nil
             else {
+                NSLog("Ignoring property %@", propertyName)
                 return nil
             }
         }
 
         // Wrap any existing errors in a TestCleanupError
         guard memoryLeakErrors.isEmpty else {
+            NSLog("Found %d memory leak errors", memoryLeakErrors.count)
             throw TestCleanupError(memoryLeakErrors: memoryLeakErrors)
         }
     }

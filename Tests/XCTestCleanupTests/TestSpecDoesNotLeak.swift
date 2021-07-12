@@ -59,6 +59,18 @@ class DetectMemoryLeakSpec: QuickSpec {
     @AutoTearDown
     private var autoTearDownObject = NSNumber(integerLiteral: 3)
 
+    // Because of how QuickSpec tests are run, none of the properties on this class are initialized
+    // when the test runner instances of thee class are created.
+    override func tearDownWithError() throws {
+        // Verify that calling the super.tearDownWithError() results in appropriate errors being raised.
+        do {
+            try super.tearDownWithError()
+        }
+        catch {
+            XCTFail("No error should have been raised")
+        }
+    }
+
     override func spec() {
         describe("describe1") {
             context("context1.1") {
