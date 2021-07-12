@@ -34,6 +34,7 @@ let package = Package(
             targets: ["XCTestCleanup"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/Quick/Quick.git", from: "4.0.0")
     ],
     targets: [
         .target(
@@ -44,6 +45,6 @@ let package = Package(
             dependencies: ["XCTestSwizzleHook"]),
         .testTarget(
             name: "XCTestCleanupTests",
-            dependencies: ["XCTestCleanup"]),
+            dependencies: ["XCTestCleanup", "Quick"]),
     ]
 )

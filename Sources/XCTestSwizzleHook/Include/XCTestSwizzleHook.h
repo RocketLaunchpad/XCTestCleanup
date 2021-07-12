@@ -31,3 +31,5 @@
 #else
 #import <XCTestSwizzleHook/XCTestCase+SwizzleHook.h>
 #endif
+
+BOOL IsNilPointer(id pointer);
