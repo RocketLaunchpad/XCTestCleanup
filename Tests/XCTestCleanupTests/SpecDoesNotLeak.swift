@@ -1,5 +1,5 @@
 //
-//  TestDetectMemoryLeak.swift
+//  SpecDoesNotLeak.swift
 //  XCTestCleanup
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
@@ -28,7 +28,10 @@ import Quick
 import XCTest
 import XCTestCleanup
 
-class DetectMemoryLeakSpec: QuickSpec {
+// QuickSpec instances are not properly initialized by the framework. So none of the properties
+// on this class will result in a memory leak error. Another test class will detect instances
+// where memory leaks would occur.
+class SpecDoesNotLeak: QuickSpec {
 
     // NOTE: static properties are not checked
     private static let staticLetString = "This is a static constant that should not raise an error"
@@ -62,13 +65,8 @@ class DetectMemoryLeakSpec: QuickSpec {
     // Because of how QuickSpec tests are run, none of the properties on this class are initialized
     // when the test runner instances of thee class are created.
     override func tearDownWithError() throws {
-        // Verify that calling the super.tearDownWithError() results in appropriate errors being raised.
-        do {
-            try super.tearDownWithError()
-        }
-        catch {
-            XCTFail("No error should have been raised")
-        }
+        // Verify that calling the super.tearDownWithError() results in no errors being raised.
+        XCTAssertNoThrow(try super.tearDownWithError())
     }
 
     override func spec() {

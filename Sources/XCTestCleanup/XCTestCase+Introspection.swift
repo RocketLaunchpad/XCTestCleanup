@@ -79,9 +79,9 @@ public extension XCTestCase {
                     return TestMemoryLeakError(className: className, propertyName: propertyName)
                 }
             }
-            // Otherwise, this did not need to be set to nil
+            // Otherwise, this is optional and already nil
             else {
-                NSLog("Ignoring property %@", propertyName)
+                NSLog("Ignoring nil property %@", propertyName)
                 return nil
             }
         }

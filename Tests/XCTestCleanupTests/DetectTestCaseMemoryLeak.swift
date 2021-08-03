@@ -1,5 +1,5 @@
 //
-//  TestDetectMemoryLeak.swift
+//  DetectTestCaseMemoryLeak.swift
 //  XCTestCleanup
 //
 //  Copyright (c) 2021 Rocket Insights, Inc.
@@ -26,7 +26,7 @@
 import XCTest
 import XCTestCleanup
 
-class TestDetectMemoryLeak: XCTestCase {
+class DetectTestCaseMemoryLeak: XCTestCase {
 
     enum TestEnum: Equatable {
         case noAssociatedValue
@@ -106,7 +106,7 @@ class TestDetectMemoryLeak: XCTestCase {
             }
 
             let classNames = Set(err.memoryLeakErrors.map { $0.className }).sorted()
-            XCTAssertEqual(classNames, ["TestDetectMemoryLeak"])
+            XCTAssertEqual(classNames, ["DetectTestCaseMemoryLeak"])
 
             let propertyNames = Set(err.memoryLeakErrors.map { $0.propertyName }).sorted()
             XCTAssertEqual(propertyNames, [
